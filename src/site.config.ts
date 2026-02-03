@@ -1,9 +1,9 @@
-import { withBase } from "./utils/helpers";
+import { withBase } from "./utils/helpers";                                                                                                                     
 
-export type Image = {
+export type Image = {                                                               
     src: string;
     alt?: string;
-    caption?: string;
+    caption?: string;                                                           
 };
 
 export type Link = {
@@ -68,12 +68,12 @@ export type SiteConfig = {
 };
 
 const siteConfig: SiteConfig = {
-    website: 'https://example.com',
-    title: 'Space Ahead',
-    description: 'A minimal space-inspired personal blog template built with Astro.js and Tailwind CSS, by Siddhesh Thadeshwar',
+    website: 'https://sabarishks.com',
+    title: 'Sabarish Kuduwa Sivanath',
+    description: 'Senior ML Engineer | Architecting End-to-End AI Systems',
     image: {
-        src: '/space-ahead-preview.jpeg',
-        alt: 'Space Ahead ✨ - A minimal space-inspired personal blog template, created by Siddhesh Thadeshwar.'
+        src: '/assets/images/portfolio-preview.jpeg',
+        alt: 'Sabarish Kuduwa Sivanath - Senior ML Engineer Portfolio'
     },
     headerNavLinks: [
         {
@@ -83,10 +83,6 @@ const siteConfig: SiteConfig = {
         {
             text: 'Blog',
             href: withBase('/blog')
-        },
-        {
-            text: 'Tags',
-            href: withBase('/tags')
         },
         {
             text: 'About',
@@ -109,81 +105,73 @@ const siteConfig: SiteConfig = {
         {
             text: 'RSS Feed',
             href: withBase('/rss.xml')
-        },
-                {
-            text: 'Sitemap',
-            href: withBase('/sitemap-index.xml')
         }
     ],
     socialLinks: [
         {
-            text: 'Dribbble',
-            href: 'https://dribbble.com/'
+            text: 'LinkedIn',
+            href: 'https://www.linkedin.com/in/sabarish-kuduwa-sivanath/'
         },
         {
-            text: 'Instagram',
-            href: 'https://instagram.com/'
-        },
-        {
-            text: 'X/Twitter',
-            href: 'https://twitter.com/'
+            text: 'GitHub',
+            href: 'https://github.com/sks3i'
         }
     ],
     hero: {
-        eyebrowText: 'Galaxy of Adventures',
-        title: 'Space Ahead ✨',
-        text: "Written by Astro-naut Sid, a space explorer at Beyond Earth.",
+        eyebrowText: 'End-to-End AI Systems',
+        title: 'Sabarish K. Sivanath',
+        text: "Senior ML Engineer at Uber. I build foundation models that perceive the world with superhuman accuracy and robotic systems that interact with it at 20µm resolution.",
         image: {
             src: '/assets/images/pixeltrue-space-discovery.svg',
-            alt: 'A person sitting at a desk in front of a computer'
+            alt: 'Technical architecture visualization'
         },
         actions: [
             {
-                text: 'Read Now',
+                text: 'View Research',
                 href: withBase('/blog')
             },
             {
-                text: 'Subscribe',
-                href: '#subscribe'
+                text: 'Contact Me',
+                href: withBase('/contact')
             }
         ]
     },
     about: {
-        title: 'About',
-        text: 'Space Ahead is a blog about space exploration and travel. It is written by Astro-naut Sid, a space explorer at Beyond Earth. Sid is known for his love of adventure and his insatiable curiosity about the universe. He has explored countless planets, discovered new life forms, and made friends with aliens along the way. 🚀',
+        title: 'The Bits & The Atoms',
+        text: 'With over 10 years of experience in Machine Learning, Computer Vision, and NLP, I focus on the intersection of complex algorithms and physical systems. At Uber, I lead multi-modal document transcription efforts, achieving a 95% reduction in development time through foundation models. My background spans from SoC performance at Intel to 0.1mm-precision robotic perception at Ebots. Beyond the code, I am a builder of water-cooled PCs, a wildlife photographer, and a seeker of the perfect South Indian filter coffee decoction.',
     },
     contactInfo: {
-        title: 'Contact',
-        text: "Hi! Whether you have a question, a suggestion, or just want to share your thoughts, I'm all ears. Feel free to get in touch through any of the methods below:",
+        title: 'Let\'s Connect',
+        text: "Whether you're interested in multi-modal models, robotic perception, or EB-1A collaboration, feel free to reach out.",
         email: {
-            text: "Drop me an email and I’ll do my best to respond as soon as possible.",
-            href: "mailto:example@example.com",
-            email: "example@example.com"
+            text: "Drop me an email for professional inquiries or technical discussions.",
+            href: "mailto:saba_rish91@hotmail.com",
+            email: "saba_rish91@hotmail.com"
         },
         socialProfiles: [
             {
                 text: "LinkedIn",
-                href: "https://www.linkedin.com/"
-            },
-            {
-                text: "Peerlist",
-                href: "https://www.peerlist.io/"
+                href: "https://www.linkedin.com/in/sabarish-kuduwa-sivanath/"
             },
             {
                 text: "GitHub",
-                href: "https://github.com/"
+                href: "https://github.com/sks3i"
+            },
+            {
+                text: "Instagram",
+                href: "https://instagram.com/sks3i"
             }
         ]
     },
     subscribe: {
-        title: 'Subscribe to Space Ahead',
-        text: 'One update per week. All the latest stories in your inbox.',
+        title: 'Stay Updated',
+        text: 'Occasional deep dives into JAX, model interpretability, and robotics.',
         formUrl: '#'
     },
     blog: {
-        description: "Read about my space adventures, explorations and the aliens I've met on my journeys."
+        description: "Technical essays on JAX, interpretability, fundamentals, and the physics of perception."
     },
-    postsPerPage: 2,
+    postsPerPage: 5,
     recentPostLimit: 3
 };
 
