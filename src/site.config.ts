@@ -72,7 +72,7 @@ const siteConfig: SiteConfig = {
     title: 'Sabarish Kuduwa Sivanath',
     description: 'Senior ML Engineer | Architecting End-to-End AI Systems',
     image: {
-        src: '/assets/images/portfolio-preview.jpeg',
+        src: withBase('/assets/images/portfolio-preview.jpeg'),
         alt: 'Sabarish Kuduwa Sivanath - Senior ML Engineer Portfolio'
     },
     headerNavLinks: [
@@ -122,7 +122,7 @@ const siteConfig: SiteConfig = {
         title: 'Sabarish K. Sivanath',
         text: "Senior ML Engineer at Uber. I build foundation models that perceive the world with superhuman accuracy and robotic systems that interact with it at 20µm resolution.",
         image: {
-            src: '/assets/images/pixeltrue-space-discovery.svg',
+            src: withBase('/assets/images/pixeltrue-space-discovery.svg'),
             alt: 'Technical architecture visualization'
         },
         actions: [

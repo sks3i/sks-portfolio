@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import siteConfig from "../site.config";
-import { withBase } from "../utils/helpers";
+import logo from "../assets/space-ahead-logo.png";
 
 type SiteIdentityProps = {
   logoWidth?: number;
@@ -22,7 +22,7 @@ const {
 
 <div class:list={["flex items-center gap-2", customClass]}>
   <Image
-    src={withBase("/space-ahead-logo.png")}
+    src={logo}
     alt="Logo"
     width={logoWidth}
     height={logoHeight}
