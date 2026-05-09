@@ -1,0 +1,102 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+	date: string;
+	readTime?: string;
+}
+
+const { title, description, date, readTime = '5 min read' } = Astro.props;
+---
+
+<Layout title={`${title} | Blog | Sabarish`} description={description}>
+	<main class="post-shell">
+		<article class="post panel">
+			<header class="post-header">
+				<p class="post-kicker">Blog Post</p>
+				<h1>{title}</h1>
+				<p class="post-meta">{date} • {readTime}</p>
+			</header>
+			<div class="post-content">
+				<slot />
+			</div>
+		</article>
+	</main>
+</Layout>
+
+<style>
+	.post-shell {
+		width: min(calc(100% - 2rem), 860px);
+		margin: 0 auto;
+		padding: 1.5rem 0 3rem;
+	}
+
+	.panel {
+		background: var(--surface);
+		backdrop-filter: blur(18px);
+		border: 1px solid var(--border);
+		border-radius: 28px;
+		box-shadow: var(--shadow);
+	}
+
+	.post {
+		padding: clamp(1.2rem, 3vw, 2.2rem);
+	}
+
+	.post-header {
+		padding-bottom: 1.1rem;
+		border-bottom: 1px solid rgba(63, 41, 24, 0.1);
+	}
+
+	.post-kicker {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.72rem;
+		color: var(--accent);
+	}
+
+	h1 {
+		margin: 0.7rem 0 0;
+		font-family: var(--serif);
+		font-size: clamp(2rem, 5vw, 3.5rem);
+		line-height: 1.02;
+		letter-spacing: -0.03em;
+	}
+
+	.post-meta {
+		margin: 0.8rem 0 0;
+		color: var(--muted);
+	}
+
+	.post-content {
+		padding-top: 1.4rem;
+	}
+
+	.post-content :global(p),
+	.post-content :global(li) {
+		color: var(--muted);
+		line-height: 1.8;
+		font-size: 1.03rem;
+	}
+
+	.post-content :global(h2) {
+		margin: 1.8rem 0 0.7rem;
+		font-family: var(--serif);
+		font-size: 1.8rem;
+		letter-spacing: -0.02em;
+	}
+
+	.post-content :global(ul) {
+		padding-left: 1.2rem;
+	}
+
+	@media (max-width: 640px) {
+		.post-shell {
+			width: min(calc(100% - 1rem), 860px);
+			padding: 0.5rem 0 2rem;
+		}
+	}
+</style>

@@ -1,0 +1,153 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+
+const posts = [
+	{
+		title: 'Designing ML Systems for Real-World Constraints',
+		path: '/blog/designing-ml-systems-for-real-world-constraints',
+		date: 'May 8, 2026',
+		summary:
+			'A practical walkthrough of turning ML models into robust systems under latency, reliability, and deployment constraints.',
+	},
+];
+---
+
+<Layout
+	title="Blog | Sabarish"
+	description="Blog posts by Sabarish on machine learning systems, robotics, and applied AI."
+>
+	<main class="blog-shell">
+		<section class="hero panel reveal">
+			<p class="kicker">Blog</p>
+			<h1>Notes on building practical ML systems.</h1>
+			<p class="lede">
+				Posts focused on production machine learning, perception systems, and the engineering tradeoffs
+				that matter in real deployments.
+			</p>
+		</section>
+
+		<section class="posts reveal">
+			{
+				posts.map((post) => (
+					<article class="panel post-card">
+						<p class="post-date">{post.date}</p>
+						<h2>{post.title}</h2>
+						<p>{post.summary}</p>
+						<a class="read-link" href={withBase(post.path)}>Read post</a>
+					</article>
+				))
+			}
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.blog-shell {
+		width: min(calc(100% - 2rem), var(--content-width));
+		margin: 0 auto;
+		padding: 1.5rem 0 3rem;
+	}
+
+	.panel {
+		background: var(--surface);
+		backdrop-filter: blur(18px);
+		border: 1px solid var(--border);
+		border-radius: 28px;
+		box-shadow: var(--shadow);
+	}
+
+	.hero {
+		padding: clamp(1.2rem, 3vw, 2.2rem);
+	}
+
+	.kicker,
+	.post-date {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.72rem;
+		color: var(--accent);
+	}
+
+	h1,
+	h2 {
+		margin: 0;
+		font-family: var(--serif);
+		font-weight: 700;
+		letter-spacing: -0.03em;
+	}
+
+	h1 {
+		margin-top: 0.7rem;
+		font-size: clamp(2rem, 6vw, 4rem);
+		line-height: 1;
+		max-width: 14ch;
+	}
+
+	h2 {
+		margin-top: 0.6rem;
+		font-size: clamp(1.5rem, 3.5vw, 2rem);
+	}
+
+	.lede,
+	.post-card p {
+		color: var(--muted);
+		line-height: 1.75;
+	}
+
+	.lede {
+		margin: 1rem 0 0;
+		max-width: 46rem;
+	}
+
+	.posts {
+		display: grid;
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+
+	.post-card {
+		padding: 1.25rem;
+	}
+
+	.post-card p {
+		margin-bottom: 0;
+	}
+
+	.read-link {
+		display: inline-flex;
+		align-items: center;
+		margin-top: 1rem;
+		padding: 0.55rem 0.8rem;
+		border-radius: 999px;
+		background: rgba(157, 75, 43, 0.12);
+		transition: background-color 160ms ease;
+	}
+
+	.read-link:hover {
+		background: rgba(157, 75, 43, 0.2);
+	}
+
+	.reveal {
+		animation: rise 700ms ease both;
+	}
+
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: translateY(18px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 640px) {
+		.blog-shell {
+			width: min(calc(100% - 1rem), var(--content-width));
+			padding: 0.5rem 0 2rem;
+		}
+	}
+</style>

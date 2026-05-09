@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 const email = 'sabarish.sivanath@outlook.com';
 const phoneHref = 'tel:9145360485';
 const phoneDisplay = '(914) 536-0485';
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
 
 const focusAreas = [
 	'Applied machine learning',
@@ -43,10 +44,10 @@ const outsideWork = [
 						I design ML systems that move cleanly from research to production, especially where
 						perception, distributed training, and physical-world constraints all collide.
 					</p>
-					<div class="hero-actions">
-						<a class="action-button primary" href="/contact">Contact</a>
-						<a class="action-button secondary" href={`mailto:${email}`}>Email Directly</a>
-					</div>
+						<div class="hero-actions">
+							<a class="action-button primary" href={withBase('/contact')}>Contact</a>
+							<a class="action-button secondary" href={`mailto:${email}`}>Email Directly</a>
+						</div>
 				</div>
 
 				<div class="hero-aside">
@@ -73,14 +74,14 @@ const outsideWork = [
 						<span class="contact-label">Email</span>
 						<strong>{email}</strong>
 					</a>
-					<a class="contact-strip-link" href={phoneHref}>
-						<span class="contact-label">Phone</span>
-						<strong>{phoneDisplay}</strong>
-					</a>
-					<a class="contact-strip-link action-link" href="/contact">
-						<span class="contact-label">Page</span>
-						<strong>Open contact page</strong>
-					</a>
+						<a class="contact-strip-link" href={phoneHref}>
+							<span class="contact-label">Phone</span>
+							<strong>{phoneDisplay}</strong>
+						</a>
+						<a class="contact-strip-link action-link" href={withBase('/contact')}>
+							<span class="contact-label">Page</span>
+							<strong>Open contact page</strong>
+						</a>
 				</div>
 			</section>
 

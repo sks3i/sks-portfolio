@@ -1,0 +1,39 @@
+---
+import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
+---
+
+<BlogPostLayout
+	title="Designing ML Systems for Real-World Constraints"
+	description="A practical look at engineering machine learning systems for latency, reliability, and deployment constraints."
+	date="May 8, 2026"
+	readTime="6 min read"
+>
+	<p>
+		Most ML failures in production are not caused by model architecture quality. They are caused by
+		fragile systems around the model.
+	</p>
+
+	<h2>Start with system constraints</h2>
+	<p>
+		Before choosing model complexity, define the latency budget, throughput expectations, and error
+		handling rules. This keeps design choices tied to operational outcomes.
+	</p>
+
+	<h2>Build for observability early</h2>
+	<p>
+		Add structured telemetry for inference latency, input drift, model confidence, and fallback
+		paths. Post-launch debugging becomes dramatically faster when these metrics are available from
+		day one.
+	</p>
+
+	<h2>Prefer graceful degradation</h2>
+	<p>
+		Design fallback behavior so the system remains useful when model confidence is low or inputs are
+		incomplete. Reliable degradation beats brittle peak performance.
+	</p>
+
+	<p>
+		The guiding principle is simple: optimize for stable behavior under real conditions, not ideal
+		benchmarks.
+	</p>
+</BlogPostLayout>

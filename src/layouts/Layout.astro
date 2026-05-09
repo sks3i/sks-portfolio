@@ -9,10 +9,25 @@ const {
 	description = 'Portfolio for Sabarish Kuduwa Sivanath, Senior Machine Learning Engineer.',
 } = Astro.props;
 const pathname = Astro.url.pathname;
+const baseUrl = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${baseUrl}${path.replace(/^\//, '')}`;
+const normalizePath = (path: string) => {
+	if (path.length > 1 && path.endsWith('/')) return path.slice(0, -1);
+	return path;
+};
+const basePrefix = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+const currentPath = normalizePath(
+	basePrefix !== '/' && pathname.startsWith(basePrefix) ? pathname.slice(basePrefix.length) || '/' : pathname
+);
 const navItems = [
-	{ href: '/', label: 'Home' },
-	{ href: '/contact', label: 'Contact' },
+	{ path: '/', label: 'Home' },
+	{ path: '/blog', label: 'Blog' },
+	{ path: '/contact', label: 'Contact' },
 ];
+const isNavActive = (path: string) => {
+	if (path === '/') return currentPath === '/';
+	return currentPath === path || currentPath.startsWith(`${path}/`);
+};
 ---
 
 <!doctype html>
@@ -27,21 +42,21 @@ const navItems = [
 		<title>{title}</title>
 	</head>
 	<body>
-		<header class="site-header">
-			<div class="site-header-inner">
-				<a class="brand-mark" href="/">Sabarish</a>
-				<nav class="site-nav" aria-label="Primary">
-					{
-						navItems.map((item) => (
-							<a
-								href={item.href}
-								class:list={['nav-link', { active: pathname === item.href }]}
-								aria-current={pathname === item.href ? 'page' : undefined}
-							>
-								{item.label}
-							</a>
-						))
-					}
+			<header class="site-header">
+				<div class="site-header-inner">
+					<a class="brand-mark" href={withBase('/')}>Sabarish</a>
+					<nav class="site-nav" aria-label="Primary">
+						{
+							navItems.map((item) => (
+								<a
+									href={withBase(item.path)}
+									class:list={['nav-link', { active: isNavActive(item.path) }]}
+									aria-current={isNavActive(item.path) ? 'page' : undefined}
+								>
+									{item.label}
+								</a>
+							))
+						}
 				</nav>
 			</div>
 		</header>
