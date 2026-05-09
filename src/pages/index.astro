@@ -1,34 +1,400 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const featuredWork = [
+	{
+		title: 'Uber',
+		eyebrow: 'Multi-modal foundation models',
+		summary:
+			'Architected training systems aimed at superhuman transcription accuracy, using Ray to scale distributed experimentation and production-oriented model development.',
+		tag: 'Distributed training',
+	},
+	{
+		title: 'Ebots',
+		eyebrow: 'Ultra-precise robotic perception',
+		summary:
+			'Built CUDA-optimized perception pipelines for 6 DoF pose estimation, pushing robotic localization to 0.1 mm precision in constrained real-world environments.',
+		tag: 'Robotic vision',
+	},
+];
+
+const focusAreas = [
+	'Applied machine learning',
+	'Perception systems',
+	'Foundation model infrastructure',
+	'CUDA optimization',
+	'Distributed training',
+	'Production ML architecture',
+];
+
+const principles = [
+	'Push beyond demo-grade models into systems that can survive latency, scale, and messy inputs.',
+	'Prefer measurable performance gains over fashionable complexity.',
+	'Bridge software and physical-world constraints instead of treating them as separate problems.',
+];
+
+const outsideWork = [
+	'Custom water-cooled PC builds',
+	'Wildlife photography',
+	'South Indian filter coffee science',
+];
 ---
 
-<Layout title="Sabarish Kuduwa Sivanath | Senior ML Engineer">
-  <main>
-    <section class="hero">
-      <h1>Sabarish Kuduwa Sivanath</h1>
-      <p class="subtitle">Senior Machine Learning Engineer</p>
-      <p class="hook">Architecting AI systems that perceive and interact with the physical world.</p>
-    </section>
+<Layout
+	title="Sabarish Kuduwa Sivanath | Senior ML Engineer"
+	description="Portfolio for Sabarish Kuduwa Sivanath, focused on machine learning systems, robotics, and multimodal AI."
+>
+	<main class="page-shell">
+		<div class="page-glow page-glow-left"></div>
+		<div class="page-glow page-glow-right"></div>
 
-    <section class="experience">
-      <h2>Featured Impact</h2>
-      <div class="card">
-        <h3>Uber: Multi-Modal Foundation Models</h3>
-        <p>Architected systems for superhuman transcription accuracy using Ray for large-scale distributed training.</p>
-      </div>
-      <div class="card">
-        <h3>Ebots: Ultra-Precise Robotic Perception</h3>
-        <p>Achieved 0.1mm precision in 6 DoF pose estimation via CUDA-optimized pipelines.</p>
-      </div>
-    </section>
+		<section class="hero panel reveal">
+			<div class="hero-copy">
+				<p class="kicker">Senior Machine Learning Engineer</p>
+				<h1>Sabarish Kuduwa Sivanath</h1>
+				<p class="lede">
+					I design ML systems that move cleanly from research to production, especially where
+					perception, distributed training, and physical-world constraints all collide.
+				</p>
+			</div>
 
-    <section class="bits-and-atoms">
-      <h2>Beyond the Code</h2>
-      <ul>
-        <li>Custom Water-Cooled PCs</li>
-        <li>Wildlife Photography</li>
-        <li>South Indian Filter Coffee Science</li>
-      </ul>
-    </section>
-  </main>
+			<div class="hero-aside">
+				<p class="aside-label">Working lens</p>
+				<p>
+					Architecting AI systems that perceive and interact with the physical world, with an
+					emphasis on reliability, throughput, and practical deployment.
+				</p>
+			</div>
+		</section>
+
+		<section class="grid-section reveal">
+			<div class="section-heading">
+				<p class="kicker">Selected Impact</p>
+				<h2>Recent work grounded in real constraints.</h2>
+			</div>
+
+			<div class="card-grid">
+				{
+					featuredWork.map((item, index) => (
+						<article class="panel work-card" style={`--delay:${index + 1};`}>
+							<div class="work-card-top">
+								<p class="work-tag">{item.tag}</p>
+								<h3>{item.title}</h3>
+								<p class="eyebrow">{item.eyebrow}</p>
+							</div>
+							<p>{item.summary}</p>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="split-section reveal">
+			<div class="panel focus-panel">
+				<p class="kicker">Core Focus</p>
+				<h2>Where I spend most of my engineering attention.</h2>
+				<div class="pill-row">
+					{focusAreas.map((item) => <span class="pill">{item}</span>)}
+				</div>
+			</div>
+
+			<div class="panel principles-panel">
+				<p class="kicker">Approach</p>
+				<h2>How I tend to build.</h2>
+				<ul class="principles-list">
+					{principles.map((item) => <li>{item}</li>)}
+				</ul>
+			</div>
+		</section>
+
+		<section class="panel reveal details-panel">
+			<div class="section-heading">
+				<p class="kicker">Outside Work</p>
+				<h2>Interests that keep the engineering instinct sharp.</h2>
+			</div>
+
+			<div class="detail-list">
+				{outsideWork.map((item) => <p>{item}</p>)}
+			</div>
+		</section>
+	</main>
 </Layout>
+
+<style>
+	.page-shell {
+		position: relative;
+		width: min(calc(100% - 2rem), var(--content-width));
+		margin: 0 auto;
+		padding: 2rem 0 4rem;
+	}
+
+	.page-glow {
+		position: fixed;
+		width: 28rem;
+		height: 28rem;
+		border-radius: 999px;
+		filter: blur(36px);
+		opacity: 0.65;
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.page-glow-left {
+		top: -8rem;
+		left: -10rem;
+		background: rgba(217, 142, 102, 0.26);
+	}
+
+	.page-glow-right {
+		top: 18rem;
+		right: -10rem;
+		background: rgba(78, 112, 101, 0.14);
+	}
+
+	.page-shell > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.panel {
+		background: var(--surface);
+		backdrop-filter: blur(18px);
+		border: 1px solid var(--border);
+		border-radius: 28px;
+		box-shadow: var(--shadow);
+	}
+
+	.hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1.8fr) minmax(16rem, 0.9fr);
+		gap: 2rem;
+		padding: 4rem clamp(1.5rem, 4vw, 3.5rem);
+		min-height: min(80vh, 46rem);
+		align-items: end;
+	}
+
+	.hero-copy {
+		max-width: 44rem;
+	}
+
+	.kicker,
+	.work-tag,
+	.aside-label,
+	.eyebrow {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.72rem;
+		color: var(--accent);
+	}
+
+	h1,
+	h2,
+	h3 {
+		margin: 0;
+		font-family: var(--serif);
+		font-weight: 700;
+		letter-spacing: -0.03em;
+	}
+
+	h1 {
+		margin-top: 0.75rem;
+		font-size: clamp(3.5rem, 10vw, 7rem);
+		line-height: 0.96;
+		max-width: 9ch;
+	}
+
+	h2 {
+		margin-top: 0.45rem;
+		font-size: clamp(2rem, 4vw, 3rem);
+		line-height: 1;
+		max-width: 12ch;
+	}
+
+	h3 {
+		margin-top: 0.75rem;
+		font-size: 2rem;
+	}
+
+	.lede,
+	.hero-aside p:last-child,
+	.work-card p:last-child,
+	.principles-list li,
+	.detail-list p {
+		margin: 0;
+		color: var(--muted);
+		font-size: 1.03rem;
+		line-height: 1.7;
+	}
+
+	.lede {
+		margin-top: 1.5rem;
+		max-width: 38rem;
+		font-size: 1.16rem;
+	}
+
+	.hero-aside {
+		align-self: start;
+		padding: 1.35rem;
+		background: rgba(255, 248, 240, 0.7);
+		border: 1px solid rgba(63, 41, 24, 0.08);
+		border-radius: 22px;
+	}
+
+	.hero-aside p:last-child {
+		margin-top: 0.85rem;
+	}
+
+	.grid-section,
+	.split-section,
+	.details-panel {
+		margin-top: 1.5rem;
+	}
+
+	.section-heading {
+		margin-bottom: 1.25rem;
+		padding: 0 0.15rem;
+	}
+
+	.card-grid,
+	.split-section {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1.5rem;
+	}
+
+	.work-card,
+	.focus-panel,
+	.principles-panel,
+	.details-panel {
+		padding: 1.7rem;
+	}
+
+	.work-card-top {
+		margin-bottom: 1.2rem;
+	}
+
+	.eyebrow {
+		margin-top: 0.45rem;
+		font-size: 0.78rem;
+		letter-spacing: 0.1em;
+	}
+
+	.pill-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 1.5rem;
+	}
+
+	.pill {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.7rem 1rem;
+		border-radius: 999px;
+		background: rgba(255, 248, 240, 0.92);
+		border: 1px solid rgba(63, 41, 24, 0.09);
+		font-size: 0.92rem;
+	}
+
+	.principles-list {
+		margin: 1.5rem 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.principles-list li + li {
+		margin-top: 1rem;
+		padding-top: 1rem;
+		border-top: 1px solid rgba(63, 41, 24, 0.08);
+	}
+
+	.detail-list {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+		margin-top: 1.25rem;
+	}
+
+	.detail-list p {
+		padding: 1rem 1.1rem;
+		background: rgba(255, 248, 240, 0.72);
+		border-radius: 18px;
+		border: 1px solid rgba(63, 41, 24, 0.08);
+	}
+
+	.reveal {
+		animation: rise 700ms ease both;
+	}
+
+	.work-card {
+		animation: rise 700ms ease both;
+		animation-delay: calc(var(--delay, 1) * 110ms);
+	}
+
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: translateY(18px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 900px) {
+		.hero,
+		.card-grid,
+		.split-section,
+		.detail-list {
+			grid-template-columns: 1fr;
+		}
+
+		.hero {
+			min-height: auto;
+			padding-top: 3rem;
+		}
+
+		h1 {
+			max-width: 11ch;
+		}
+
+		h2 {
+			max-width: none;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.page-shell {
+			width: min(calc(100% - 1rem), var(--content-width));
+			padding: 0.5rem 0 2rem;
+		}
+
+		.hero,
+		.work-card,
+		.focus-panel,
+		.principles-panel,
+		.details-panel {
+			padding: 1.3rem;
+			border-radius: 22px;
+		}
+
+		.hero {
+			gap: 1.5rem;
+		}
+
+		h1 {
+			font-size: clamp(3rem, 18vw, 4.4rem);
+		}
+
+		.lede,
+		.hero-aside p:last-child,
+		.work-card p:last-child,
+		.principles-list li,
+		.detail-list p {
+			font-size: 0.98rem;
+		}
+	}
+</style>

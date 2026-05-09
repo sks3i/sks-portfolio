@@ -1,23 +1,86 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const {
+	title,
+	description = 'Portfolio for Sabarish Kuduwa Sivanath, Senior Machine Learning Engineer.',
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="description" content={description} />
+		<title>{title}</title>
 	</head>
 	<body>
 		<slot />
 	</body>
 </html>
 
-<style>
-	html,
+<style is:global>
+	:root {
+		--page-bg: #f3ede3;
+		--page-bg-strong: #e6d9c5;
+		--surface: rgba(255, 251, 246, 0.74);
+		--surface-strong: rgba(255, 248, 240, 0.9);
+		--border: rgba(63, 41, 24, 0.12);
+		--text: #1e1a17;
+		--muted: #5f564f;
+		--accent: #9d4b2b;
+		--accent-soft: #d98e66;
+		--shadow: 0 22px 60px rgba(72, 43, 15, 0.12);
+		--content-width: 1120px;
+		--sans:
+			'Avenir Next', 'Segoe UI', 'Helvetica Neue', 'Nimbus Sans', 'Liberation Sans',
+			sans-serif;
+		--serif: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
 	body {
 		margin: 0;
-		width: 100%;
-		height: 100%;
+		min-width: 320px;
+		font-family: var(--sans);
+		color: var(--text);
+		background:
+			radial-gradient(circle at top left, rgba(217, 142, 102, 0.32), transparent 36%),
+			radial-gradient(circle at top right, rgba(82, 107, 81, 0.16), transparent 28%),
+			linear-gradient(180deg, #f9f3ea 0%, var(--page-bg) 55%, var(--page-bg-strong) 100%);
+	}
+
+	a {
+		color: inherit;
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+	}
+
+	button,
+	input,
+	textarea,
+	select {
+		font: inherit;
+	}
+
+	::selection {
+		background: rgba(157, 75, 43, 0.18);
 	}
 </style>
