@@ -1,22 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const featuredWork = [
-	{
-		title: 'Uber',
-		eyebrow: 'Multi-modal foundation models',
-		summary:
-			'Architected training systems aimed at superhuman transcription accuracy, using Ray to scale distributed experimentation and production-oriented model development.',
-		tag: 'Distributed training',
-	},
-	{
-		title: 'Ebots',
-		eyebrow: 'Ultra-precise robotic perception',
-		summary:
-			'Built CUDA-optimized perception pipelines for 6 DoF pose estimation, pushing robotic localization to 0.1 mm precision in constrained real-world environments.',
-		tag: 'Robotic vision',
-	},
-];
+const email = 'sabarish.sivanath@outlook.com';
+const phoneHref = 'tel:9145360485';
+const phoneDisplay = '(914) 536-0485';
 
 const focusAreas = [
 	'Applied machine learning',
@@ -48,46 +35,54 @@ const outsideWork = [
 		<div class="page-glow page-glow-left"></div>
 		<div class="page-glow page-glow-right"></div>
 
-		<section class="hero panel reveal">
-			<div class="hero-copy">
-				<p class="kicker">Senior Machine Learning Engineer</p>
-				<h1>Sabarish Kuduwa Sivanath</h1>
+			<section class="hero panel reveal">
+				<div class="hero-copy">
+					<p class="kicker">Senior Machine Learning Engineer</p>
+					<h1>Sabarish</h1>
 				<p class="lede">
-					I design ML systems that move cleanly from research to production, especially where
-					perception, distributed training, and physical-world constraints all collide.
-				</p>
-			</div>
+						I design ML systems that move cleanly from research to production, especially where
+						perception, distributed training, and physical-world constraints all collide.
+					</p>
+					<div class="hero-actions">
+						<a class="action-button primary" href="/contact">Contact</a>
+						<a class="action-button secondary" href={`mailto:${email}`}>Email Directly</a>
+					</div>
+				</div>
 
-			<div class="hero-aside">
-				<p class="aside-label">Working lens</p>
-				<p>
-					Architecting AI systems that perceive and interact with the physical world, with an
-					emphasis on reliability, throughput, and practical deployment.
-				</p>
-			</div>
-		</section>
+				<div class="hero-aside">
+					<p class="aside-label">Direct Contact</p>
+					<div class="contact-points">
+						<a href={`mailto:${email}`}>{email}</a>
+						<a href={phoneHref}>{phoneDisplay}</a>
+					</div>
+					<p>Architecting AI systems for the physical world, with practical deployment in view.</p>
+				</div>
+			</section>
 
-		<section class="grid-section reveal">
-			<div class="section-heading">
-				<p class="kicker">Selected Impact</p>
-				<h2>Recent work grounded in real constraints.</h2>
-			</div>
-
-			<div class="card-grid">
-				{
-					featuredWork.map((item, index) => (
-						<article class="panel work-card" style={`--delay:${index + 1};`}>
-							<div class="work-card-top">
-								<p class="work-tag">{item.tag}</p>
-								<h3>{item.title}</h3>
-								<p class="eyebrow">{item.eyebrow}</p>
-							</div>
-							<p>{item.summary}</p>
-						</article>
-					))
-				}
-			</div>
-		</section>
+			<section class="grid-section reveal">
+				<div class="section-heading">
+					<p class="kicker">Contact</p>
+					<h2>Email or call without the runaround.</h2>
+					<p class="section-copy">
+						If you want to discuss machine learning systems, robotics, or applied AI
+						infrastructure, start here.
+					</p>
+				</div>
+				<div class="contact-strip panel">
+					<a class="contact-strip-link" href={`mailto:${email}`}>
+						<span class="contact-label">Email</span>
+						<strong>{email}</strong>
+					</a>
+					<a class="contact-strip-link" href={phoneHref}>
+						<span class="contact-label">Phone</span>
+						<strong>{phoneDisplay}</strong>
+					</a>
+					<a class="contact-strip-link action-link" href="/contact">
+						<span class="contact-label">Page</span>
+						<strong>Open contact page</strong>
+					</a>
+				</div>
+			</section>
 
 		<section class="split-section reveal">
 			<div class="panel focus-panel">
@@ -178,9 +173,7 @@ const outsideWork = [
 	}
 
 	.kicker,
-	.work-tag,
-	.aside-label,
-	.eyebrow {
+	.aside-label {
 		margin: 0;
 		text-transform: uppercase;
 		letter-spacing: 0.12em;
@@ -211,14 +204,9 @@ const outsideWork = [
 		max-width: 12ch;
 	}
 
-	h3 {
-		margin-top: 0.75rem;
-		font-size: 2rem;
-	}
-
 	.lede,
+	.section-copy,
 	.hero-aside p:last-child,
-	.work-card p:last-child,
 	.principles-list li,
 	.detail-list p {
 		margin: 0;
@@ -233,6 +221,41 @@ const outsideWork = [
 		font-size: 1.16rem;
 	}
 
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.9rem;
+		margin-top: 1.75rem;
+	}
+
+	.action-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.85rem 1.2rem;
+		border-radius: 999px;
+		border: 1px solid transparent;
+		font-weight: 600;
+		transition:
+			transform 180ms ease,
+			background-color 180ms ease,
+			border-color 180ms ease;
+	}
+
+	.action-button:hover {
+		transform: translateY(-1px);
+	}
+
+	.action-button.primary {
+		background: var(--accent);
+		color: #fff8f2;
+	}
+
+	.action-button.secondary {
+		background: rgba(255, 248, 240, 0.76);
+		border-color: rgba(63, 41, 24, 0.1);
+	}
+
 	.hero-aside {
 		align-self: start;
 		padding: 1.35rem;
@@ -243,6 +266,18 @@ const outsideWork = [
 
 	.hero-aside p:last-child {
 		margin-top: 0.85rem;
+	}
+
+	.contact-points {
+		display: grid;
+		gap: 0.5rem;
+		margin-top: 0.9rem;
+	}
+
+	.contact-points a,
+	.contact-strip-link strong {
+		font-size: 1rem;
+		font-weight: 600;
 	}
 
 	.grid-section,
@@ -256,28 +291,59 @@ const outsideWork = [
 		padding: 0 0.15rem;
 	}
 
-	.card-grid,
+	.section-copy {
+		margin-top: 0.9rem;
+		max-width: 40rem;
+	}
+
+	.contact-strip {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+		padding: 1rem;
+	}
+
+	.contact-strip-link {
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+		padding: 1rem 1.1rem;
+		border-radius: 20px;
+		background: rgba(255, 248, 240, 0.72);
+		border: 1px solid rgba(63, 41, 24, 0.08);
+		transition:
+			transform 180ms ease,
+			background-color 180ms ease,
+			border-color 180ms ease;
+	}
+
+	.contact-strip-link:hover {
+		transform: translateY(-2px);
+		background: rgba(255, 251, 246, 0.92);
+		border-color: rgba(157, 75, 43, 0.18);
+	}
+
+	.contact-label {
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.72rem;
+		color: var(--accent);
+	}
+
+	.action-link {
+		justify-content: center;
+	}
+
 	.split-section {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 1.5rem;
 	}
 
-	.work-card,
 	.focus-panel,
 	.principles-panel,
 	.details-panel {
 		padding: 1.7rem;
-	}
-
-	.work-card-top {
-		margin-bottom: 1.2rem;
-	}
-
-	.eyebrow {
-		margin-top: 0.45rem;
-		font-size: 0.78rem;
-		letter-spacing: 0.1em;
 	}
 
 	.pill-row {
@@ -327,11 +393,6 @@ const outsideWork = [
 		animation: rise 700ms ease both;
 	}
 
-	.work-card {
-		animation: rise 700ms ease both;
-		animation-delay: calc(var(--delay, 1) * 110ms);
-	}
-
 	@keyframes rise {
 		from {
 			opacity: 0;
@@ -346,7 +407,7 @@ const outsideWork = [
 
 	@media (max-width: 900px) {
 		.hero,
-		.card-grid,
+		.contact-strip,
 		.split-section,
 		.detail-list {
 			grid-template-columns: 1fr;
@@ -373,7 +434,6 @@ const outsideWork = [
 		}
 
 		.hero,
-		.work-card,
 		.focus-panel,
 		.principles-panel,
 		.details-panel {
@@ -390,8 +450,8 @@ const outsideWork = [
 		}
 
 		.lede,
+		.section-copy,
 		.hero-aside p:last-child,
-		.work-card p:last-child,
 		.principles-list li,
 		.detail-list p {
 			font-size: 0.98rem;
