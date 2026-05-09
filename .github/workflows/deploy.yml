@@ -3,7 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main
       - master
   workflow_dispatch:
 
@@ -38,6 +37,7 @@ jobs:
       - name: Build site
         env:
           ASTRO_TELEMETRY_DISABLED: "1"
+          CUSTOM_DOMAIN: "sabarishks.com"
         run: npm run build
 
       - name: Upload Pages artifact
