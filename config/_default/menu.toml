@@ -1,0 +1,9 @@
+[[main]]
+name = "Posts"
+url = "/posts/"
+weight = 10
+
+[[main]]
+name = "About"
+url = "/about/"
+weight = 30

@@ -1,0 +1,16 @@
+baseURL = "https://sabarishks.com/"
+languageCode = "en-us"
+title = "Sabarish's Space"
+theme = "PaperMod"
+
+[params]
+  description = "AI, Robotics, Spatial Computing & little bit of other things..."
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
