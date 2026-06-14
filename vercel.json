@@ -1,7 +1,5 @@
 {
   "env": {
-    "HUGO_VERSION": "0.126.1",
-    "GO_VERSION": "1.21"
-  },
-  "buildCommand": "hugo mod tidy && hugo --gc --minify"
+    "HUGO_VERSION": "0.126.1"
+  }
 }
