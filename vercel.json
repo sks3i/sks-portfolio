@@ -1,6 +1,6 @@
 {
   "env": {
-    "HUGO_VERSION": "0.126.1"
-  },
-  "buildCommand": "git submodule update --init --recursive && hugo --gc --minify"
+    "HUGO_VERSION": "0.126.1",
+    "GO_VERSION": "1.21"
+  }
 }

@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Sabarish&#39;s Space</title>
-    <link>http://localhost:1313/</link>
-    <description>Recent content on Sabarish&#39;s Space</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 13 Jun 2026 21:13:20 -0700</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>World Model Essay - Dreamer Series</title>
-      <link>http://localhost:1313/posts/world-model-essay-dreamer-series-2026/</link>
-      <pubDate>Sat, 13 Jun 2026 21:13:20 -0700</pubDate>
-      <guid>http://localhost:1313/posts/world-model-essay-dreamer-series-2026/</guid>
-      <description>&lt;p&gt;Introduction (delete the sub title though)&lt;/p&gt;
-&lt;p&gt;What is this about,&lt;/p&gt;
-&lt;p&gt;Higher level architecture&lt;/p&gt;
-&lt;p&gt;The initial architecture for learning the world model was published in 2018 by David Ha [1].&lt;/p&gt;
-&lt;p&gt;The dreamer makes it fully differentiable and scalable by replacing RNN with RSSM, integrating latent space with history and….&lt;/p&gt;
-&lt;h2 id=&#34;dreamer-core---rssm&#34;&gt;Dreamer Core - RSSM&lt;/h2&gt;
-&lt;p&gt;One of the core contributions of the Dreamer paper is the Recurrent State Space Model. It computes two latents, a deterministic one ($h_t$) and a stochastic one ($z_t$). The deterministic latent is a recurrent state, which tells us how the world has evolved. The stochastic latent tells us the model’s current belief about the world.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>About</title>
-      <link>http://localhost:1313/about/</link>
-      <pubDate>Sat, 13 Jun 2026 13:52:35 -0700</pubDate>
-      <guid>http://localhost:1313/about/</guid>
-      <description>&lt;p&gt;Hi, I&amp;rsquo;m &lt;strong&gt;&lt;a href=&#34;https://linkedin.com/in/sabarishks/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Sabarish Kuduwa&lt;/a&gt;&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;I am a Technical Lead at Uber working on Document Understanding. I architect spatial models and Vision-Language Models (VLMs) to scale document transcription globally, operating beyond human baseline accuracy.&lt;/p&gt;
-&lt;p&gt;Previously, I was the Technical Lead at the robotics startup Ebots, where I built the core Perception Stack—spanning from 3D reconstruction to pose estimation for embodied systems.&lt;/p&gt;
-&lt;p&gt;My work sits at the intersection of multimodal reasoning and physical space. I am focused on mathematically forcing models to obey spatial constraints and dropping down into the C++/CUDA architectures that allow machines to perceive the physical world. This site is a clean-room repository for my technical deep-dives, architectural notes, and open-source experiments.&lt;/p&gt;</description>
-    </item>
-  </channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Sabarish&#39;s Space</title>
+		<link>http://localhost:1313/</link>
+		<description>Recent content on Sabarish&#39;s Space</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 13 Jun 2026 21:13:20 -0700</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>World Model Essay - Dreamer Series</title>
+				<link>http://localhost:1313/posts/world-model-essay-dreamer-series-2026/</link>
+				<pubDate>Sat, 13 Jun 2026 21:13:20 -0700</pubDate>
+				<guid>http://localhost:1313/posts/world-model-essay-dreamer-series-2026/</guid>
+				<description>&lt;p&gt;Introduction (delete the sub title though)&lt;/p&gt;&#xA;&lt;p&gt;What is this about,&lt;/p&gt;&#xA;&lt;p&gt;Higher level architecture&lt;/p&gt;&#xA;&lt;p&gt;The initial architecture for learning the world model was published in 2018 by David Ha [1].&lt;/p&gt;&#xA;&lt;p&gt;The dreamer makes it fully differentiable and scalable by replacing RNN with RSSM, integrating latent space with history and….&lt;/p&gt;&#xA;&lt;h2 id=&#34;dreamer-core---rssm&#34;&gt;Dreamer Core - RSSM&lt;/h2&gt;&#xA;&lt;p&gt;One of the core contributions of the Dreamer paper is the Recurrent State Space Model. It computes two latents, a deterministic one ($h_t$) and a stochastic one ($z_t$). The deterministic latent is a recurrent state, which tells us how the world has evolved. The stochastic latent tells us the model’s current belief about the world.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>About</title>
+				<link>http://localhost:1313/about/</link>
+				<pubDate>Sat, 13 Jun 2026 13:52:35 -0700</pubDate>
+				<guid>http://localhost:1313/about/</guid>
+				<description>&lt;p&gt;Hi, I&amp;rsquo;m &lt;strong&gt;&lt;a href=&#34;https://linkedin.com/in/sabarishks/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Sabarish Kuduwa&lt;/a&gt;&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;I am a Technical Lead at Uber working on Document Understanding. I architect spatial models and Vision-Language Models (VLMs) to scale document transcription globally, operating beyond human baseline accuracy.&lt;/p&gt;&#xA;&lt;p&gt;Previously, I was the Technical Lead at the robotics startup Ebots, where I built the core Perception Stack—spanning from 3D reconstruction to pose estimation for embodied systems.&lt;/p&gt;&#xA;&lt;p&gt;My work sits at the intersection of multimodal reasoning and physical space. I am focused on mathematically forcing models to obey spatial constraints and dropping down into the C++/CUDA architectures that allow machines to perceive the physical world. This site is a clean-room repository for my technical deep-dives, architectural notes, and open-source experiments.&lt;/p&gt;</description>
+			</item>
+	</channel>
 </rss>
