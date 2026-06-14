@@ -1,2 +1,8 @@
 [params]
   env = "production"
+
+[home]
+  [home.posts]
+    enabled = true
+    count = 3          # Change this to 1 if you want ONLY the latest post
+    showRecent = true

@@ -5,7 +5,7 @@
 	<meta name="generator" content="Hugo 0.163.1"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Sabarish&#39;s Space</title>
 
 <meta name="description" content="AI, Robotics, Spatial Computing &amp; little bit of other things...">
@@ -66,29 +66,16 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="http://localhost:1313/">
-  <meta property="og:site_name" content="Sabarish&#39;s Space">
-  <meta property="og:title" content="Sabarish&#39;s Space">
-  <meta property="og:description" content="AI, Robotics, Spatial Computing &amp; little bit of other things...">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="website">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Sabarish&#39;s Space">
-  <meta name="twitter:description" content="AI, Robotics, Spatial Computing &amp; little bit of other things...">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Sabarish's Space",
-  "url": "http://localhost:1313/",
-  "description": "AI, Robotics, Spatial Computing \u0026 little bit of other things...",
-  "logo": "http://localhost:1313/favicon.ico",
-  "sameAs": [
-      
-  ]
-}
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ]
+        });">
 </script>
 </head>
 <body class="list" id="top">
@@ -134,6 +121,32 @@
     </nav>
 </header>
 <main class="main"> 
+
+<article class="first-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">World Model Essay - Dreamer Series
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Introduction (delete the sub title though)
+What is this about,
+Higher level architecture
+The initial architecture for learning the world model was published in 2018 by David Ha [1].
+The dreamer makes it fully differentiable and scalable by replacing RNN with RSSM, integrating latent space with history and….
+Dreamer Core - RSSM One of the core contributions of the Dreamer paper is the Recurrent State Space Model. It computes two latents, a deterministic one ($h_t$) and a stochastic one ($z_t$). The deterministic latent is a recurrent state, which tells us how the world has evolved. The stochastic latent tells us the model’s current belief about the world.
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-06-13 21:13:20 -0700 PDT'>June 13, 2026</span>&nbsp;·&nbsp;<span>3 min</span></footer>
+  <a class="entry-link" aria-label="post link to World Model Essay - Dreamer Series" href="http://localhost:1313/posts/world-model-essay-dreamer-series-2026/"></a>
+</article>
     </main>
     
 <footer class="footer">
