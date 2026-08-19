@@ -1,4 +1,7 @@
 {
+  "buildCommand": "hugo",
+  "outputDirectory": "public",
+  "installCommand": "",
   "env": {
     "HUGO_VERSION": "0.126.1"
   }
