@@ -6,55 +6,45 @@ tags = ["computer-vision", "place-recognition", "vision-language-models", "robot
 description = "A systematic evaluation of SigLIP2 as a visual memory backbone for indoor place recognition, probing how far appearance-only embeddings can take us before geometry becomes non-negotiable."
 +++
 
-## Motivation
+To perform long horizon tasks, agents need memory that supports reasoning over time and reduces the search space. In robotics there is a quite a bit of work happening in spatial and episodic memory, most of which combines geometry, pose and tracking. In this post I'm asking a simple question: How far can a pure appearance based approach using a modern vision language embedding model like SigLIP, go for place recongition and basic memory under real object and viewpoint change?
 
-Indoor place recognition is a deceptively hard problem. Unlike outdoor localization—where GPS, distinct landmarks, and large viewpoint variation make the task well-posed—indoor environments are characterized by repetitive structure: identical corridors, symmetric rooms, and near-identical furniture arrangements that defeat naive nearest-neighbor retrieval over any appearance descriptor.
+## Overview
 
-The question this post asks is deliberately narrow: *before* we reach for geometry, depth, or sequential context, how far can a frozen, appearance-only embedding model take us? Specifically, I evaluate **SigLIP2**—Google's latest contrastive vision-language model—as a drop-in visual memory for indoor place recognition.
+I test a lightweight online appearance based visual memory. Each image is embedded using [SigLIP2](https://huggingface.co/google/siglip2-base-patch16-512) model and either assigned to existing place cluster or used to start a new one. For a known place, we retrive previous observations and check for changes using [QwenVL 2B](https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct) model.
 
----
+Explicit non-goals: This system does not use camera pose, ego-motion, geometric verification, 3D structure, or persistent object identities. It is intentionally appearance-only.
 
-## What is SigLIP2?
+## Dataset
 
-SigLIP2 is the successor to SigLIP (Sigmoid Loss for Language-Image Pre-training). Where CLIP uses a softmax over a batch, SigLIP replaces it with independent sigmoid losses per pair, removing the requirement for large batch sizes and making the loss better calibrated.
+To test this out, I create a small dataset with 6 different objects on 3 different surfaces - 2 wooden table and 1 marble like table. 
+Each image contain a max of 4 objects, deliberately the objects are either removed or added and the images are taken from a few different viewpoints. A few images from the dataset are shown below.
 
-SigLIP2 pushes this further with:
-- Decoder-based captioning objectives layered on top of contrastive training
-- Self-distillation from a masked-image-modeling teacher
-- Training on a significantly larger and more curated dataset
+![Retrieval results](/static/images/siglip2/000.jpg)
 
-The result is an image encoder that produces rich, semantically grounded embeddings without any fine-tuning.
+Images are annotated with Place ID and a sequence of images are created to simulate a "robot" moving through space.
 
----
+4. Evaluation & Results
+Place Assignment
 
-## Experimental Setup
+Recall@1 for correct place: 96% (25/26).
+Single failure case: two different surfaces containing nearly identical object sets (red scoop + cube + metal clip). The embedding matched the objects more strongly than the place.
 
-### Dataset
+Similarity Behavior Along a Sequence
 
-### Query & Database Construction
+Consecutive SigLIP2 similarity stays high across many true place transitions → poor signal for detecting place changes.
+Similarity to the first observation of a place decays under rearrangement (within-place drift).
+Returning to a previous place produces variable recovery of similarity to the original anchor.
 
-### Retrieval Protocol
+5. Analysis & Limitations
 
-### Baselines
+Global embeddings work reasonably for place recognition when places have distinct overall appearance.
+They become brittle when scenes are object-centric and different places share similar objects.
+Consecutive similarity is not a reliable transition detector.
+Maintaining only a single anchor image per place is limited because of within-place drift.
+These results highlight why geometry and instance tracking become necessary for more robust spatial memory.
 
----
+6. Conclusion
 
-## Results
-
-### Top-k Recall
-
-### Hard Negatives: The Repetitive Environment Problem
-
-### Failure Mode Analysis
-
----
-
-## Where Appearance Alone Breaks Down
-
----
-
-## What This Tells Us About Visual Memory
-
----
-
-## References
+A pure SigLIP2 appearance memory can achieve strong place assignment on a controlled indoor set, but fails in predictable object-dominated cases and provides weak transition signals.
+Useful as a lightweight memory layer for high-level semantic context, but insufficient as a standalone solution for reliable robotic place recognition under change.
+Clear next steps would involve hybrid appearance + geometry or instance-level association.

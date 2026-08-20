@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Robotics on Sabarish&#39;s Space</title>
+    <link>http://localhost:1313/tags/robotics/</link>
+    <description>Recent content in Robotics on Sabarish&#39;s Space</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 18 Aug 2026 21:14:00 -0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/robotics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How Far Can Appearance-Only Visual Memory Go? Evaluating SigLIP2 for Indoor Place Recognition</title>
+      <link>http://localhost:1313/posts/siglip2-indoor-place-recognition/</link>
+      <pubDate>Tue, 18 Aug 2026 21:14:00 -0700</pubDate>
+      <guid>http://localhost:1313/posts/siglip2-indoor-place-recognition/</guid>
+      <description>A systematic evaluation of SigLIP2 as a visual memory backbone for indoor place recognition, probing how far appearance-only embeddings can take us before geometry becomes non-negotiable.</description>
+    </item>
+  </channel>
+</rss>
