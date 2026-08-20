@@ -2,6 +2,7 @@ baseURL = "https://sabarishks.com/"
 languageCode = "en-us"
 title = "Sabarish's Space"
 theme = "PaperMod"
+mainSections = ["posts"]
 
 [params]
   description = "AI, Robotics, Spatial Computing & little bit of other things..."
