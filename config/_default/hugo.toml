@@ -10,6 +10,7 @@ mainSections = ["posts"]
   ShowReadingTime = true
   ShowShareButtons = true
   ShowPostNavLinks = true
+  disableSpecial1stPost = true
 
 [markup]
   [markup.goldmark]
