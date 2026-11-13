@@ -69,6 +69,8 @@ The same recipe at 3 bits gives a usable model. On the full GSM8K test set (1,31
 
 GPTQ and AWQ were run with their standard implementations in llm-compressor. Because every model answers the same problems, I compared them with a paired test (exact McNemar). The LLM-guided model beats GPTQ by 4.9 points and AWQ by 8.3 (both p < 0.0001). It stays below RTN 4-bit (p = 0.0007), which spends a full extra bit per weight.
 
+This is not a like-for-like comparison. The LLM-guided model keeps 0.14% of its weights in BF16 (counted in its bpw), while GPTQ and AWQ quantize every weight. A sparse set of full-precision weights also needs a special kernel, and the bpw above doesn't count their indices, which add about 0.02-0.04. The ablation below separates the two effects: activation-aware rounding with no kept weights already beats GPTQ, and the kept weights add the rest.
+
 Without any data, the weights-only arm also beat the data-free baselines on a 200-problem subset: 73.5% on GSM8K, against 57% for RTN and 49% for HQQ.
 
 The most interesting pattern is that **perplexity and reasoning disagree.** GPTQ has the best perplexity of any 3-bit model and loses clearly on GSM8K.
