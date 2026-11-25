@@ -48,16 +48,16 @@ That is the exact McNemar test. Items both models get right, or both get wrong, 
 
 Out of the box, Qwen3-VL-2B already points reasonably well, and scaling the same family to 32B adds about 7 points on RefCOCO and Point-Bench and 21 on Where2Place. That gap was the target.
 
-| Out of the box | RefCOCO | Where2Place | Point-Bench | Latency (p50) |
+| Out of the box | RefCOCO | Where2Place | Point-Bench | Latency (p50, RefCOCO) |
 | --- | --- | --- | --- | --- |
-| Qwen3-VL-2B, my prompt | 80.6% | 40% | 48.9% | 274 ms |
-| Qwen3-VL-2B, native format | 86.2% | 44% | 51.9% | 314 ms |
-| Molmo-7B-D | 89.0% | 31% | 56.6% | 915 ms |
-| Qwen3-VL-32B (AWQ 4-bit) | 93.2% | 65% | 59.0% | 885 ms |
+| Qwen3-VL-2B, my prompt | 80.6% | 40% | 48.9% | 272 ms (HF) |
+| Qwen3-VL-2B, native format | 86.2% | 44% | 51.9% | 314 ms (HF) |
+| Molmo-7B-D | 89.0% | 31% | 56.6% | 915 ms (HF) |
+| Qwen3-VL-32B (AWQ 4-bit) | 93.2% | 65% | 59.0% | 885 ms (vLLM) |
 
-Each baseline gets its best shot, through an adapter for its own output format. The 32B was quantized to 4 bits to fit the card and served with vLLM; the others ran in Hugging Face transformers.
+Each baseline gets its best shot, through an adapter for its own output format. The 32B was quantized to 4 bits to fit the card and served with vLLM; the others ran in Hugging Face transformers. So the latencies in this table are not like-for-like: vLLM is the faster engine. The fair comparison comes at the end, with both models under the same vLLM settings.
 
-Two details are worth noticing. The 2B loses 6 points on RefCOCO in my format purely from formatting slips: 126 answers closed the tag with `]`. And the 32B is weak at counting (15%). Asked to point at "all the apples" under an instruction that says "exactly one point", it obeys the instruction.
+Two details are worth noticing. The 2B loses 6 points on RefCOCO in my format purely from formatting slips: 126 answers closed the tag with `]`. And the 32B scores only 15% on counting, partly because of my harness. Its native JSON answer spends about 20 tokens per point, so 37 of its 195 counting answers ran into the frozen 64-token cap, were cut off mid-list and scored as misses. Most of the rest (145) gave a single point. Rerunning the 62 Point-Bench items where it hit the cap, with room for 512 tokens, lifts its counting score only to 19.5%: most of the long lists were wrong anyway.
 
 ## SFT does most of the work
 
@@ -118,7 +118,7 @@ $$
 $$
 </div>
 
-So β is a temperature on how far the reward may reweight what SFT already does. I used β = 0.02, and the reference model cost no memory: it is the same weights with the LoRA adapter switched off.
+So β is a temperature on how far the reward may reweight what SFT already does. I used β = 0.02, and the reference model cost no memory. The SFT adapter is merged into the weights before RL starts, and RL trains a fresh LoRA adapter on top, so switching that adapter off gives back exactly the SFT model (for run 4, the counting-SFT model described there).
 
 ## Run 1: a gain on the wrong benchmark
 
@@ -234,7 +234,7 @@ The final 2B is statistically level with the 4-bit 32B on Point-Bench and RefCOC
 | Qwen3-VL-2B, after SFT + 4 GRPO runs | 92.1% | 57% | 60.9% | 90 ms |
 | Qwen3-VL-32B (AWQ 4-bit), out of the box | 93.2% | 65% | 59.0% | 885 ms |
 
-Neither difference is significant (Point-Bench p = 0.25, RefCOCO p = 0.12). On Where2Place the final model trails, but run 1 matches the 32B's 65%. Scores are from the frozen Hugging Face harness; served with vLLM under the 32B's settings, the 2B scores 92.2%, 62% and 61.5%. The 2B also needs about 4.5 times less memory for its weights.
+Neither difference is significant (Point-Bench p = 0.25, RefCOCO p = 0.12). The latency gap is about tenfold because the comparison uses the same engine: under the 32B's vLLM settings, the 2B answers in 90 ms. Training contributes too: the fine-tuned 2B answers in about 15 tokens instead of the base model's 27–34, which alone cuts its Hugging Face latency from 272 to 164 ms. On Where2Place the final model trails, but run 1 matches the 32B's 65%. Scores are from the frozen Hugging Face harness; served with vLLM under the 32B's settings, the 2B scores 92.2%, 62% and 61.5%. The 2B also needs about 4.5 times less memory for its weights.
 
 The category split shows the two models win in different places:
 
@@ -246,7 +246,7 @@ The category split shows the two models win in different places:
 | Spatial | 72.8% | 70.3% | 75.9% | 66.2% |
 | Steerable | 54.5% | 51.5% | 45.5% | 40.9% |
 
-The 32B leads on reasoning and spatial questions, which need knowledge that scale provides and RL did not add. The 2B's edge comes almost entirely from counting: the one skill I put in with SFT and then sharpened with RL. RL closed the gap where it had something to sharpen, and only there.
+The 32B leads on reasoning and spatial questions, which need knowledge that scale provides and RL did not add. The 2B's edge comes almost entirely from counting: the one skill I put in with SFT and then sharpened with RL. Part of that edge comes from the harness, though. The 64-token cap cut off 37 of the 32B's counting answers, as noted earlier, so I reran every item where it hit the cap with a 512-token cap. The 32B moves from 59.0% to 60.2% on Point-Bench (counting 15.4% to 19.5%). That is still level with the 2B's 60.9% (p = 0.68), and the 2B's counting lead holds (30.3% vs 19.5%, p < 0.0001). RL closed the gap where it had something to sharpen, and only there.
 
 ## How this compares with published work
 
