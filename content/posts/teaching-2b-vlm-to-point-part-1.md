@@ -48,16 +48,16 @@ That is the exact McNemar test. Items both models get right, or both get wrong, 
 
 Out of the box, Qwen3-VL-2B already points reasonably well, and scaling the same family to 32B adds about 7 points on RefCOCO and Point-Bench and 21 on Where2Place. That gap was the target.
 
-| Out of the box | RefCOCO | Where2Place | Point-Bench | Latency (p50, RefCOCO) |
+| Out of the box | RefCOCO | Where2Place | Point-Bench | Latency (p50, RefCOCO, vLLM) |
 | --- | --- | --- | --- | --- |
-| Qwen3-VL-2B, my prompt | 80.6% | 40% | 48.9% | 272 ms (HF) |
-| Qwen3-VL-2B, native format | 86.2% | 44% | 51.9% | 314 ms (HF) |
-| Molmo-7B-D | 89.0% | 31% | 56.6% | 915 ms (HF) |
-| Qwen3-VL-32B (AWQ 4-bit) | 93.2% | 65% | 59.0% | 885 ms (vLLM) |
+| Qwen3-VL-2B, my prompt | 80.6% | 40% | 48.9% | 146 ms |
+| Qwen3-VL-2B, native format | 86.2% | 44% | 51.9% | 166 ms |
+| Molmo-7B-D | 89.0% | 31% | 56.6% | 915 ms (HF)* |
+| Qwen3-VL-32B (AWQ 4-bit) | 93.2% | 65% | 59.0% | 885 ms |
 
-Each baseline gets its best shot, through an adapter for its own output format. The 32B was quantized to 4 bits to fit the card and served with vLLM; the others ran in Hugging Face transformers. So the latencies in this table are not like-for-like: vLLM is the faster engine. The fair comparison comes at the end, with both models under the same vLLM settings.
+Each baseline gets its best shot, through an adapter for its own output format. The 32B was quantized to 4 bits to fit the card. All latencies are measured with vLLM under the 32B's settings, so they are like-for-like. *The exception is Molmo, which is timed in Hugging Face transformers because vLLM did not reproduce its outputs. Accuracy comes from the frozen Hugging Face harness for every model except the 32B, which needs vLLM to fit.
 
-Two details are worth noticing. The 2B loses 6 points on RefCOCO in my format purely from formatting slips: 126 answers closed the tag with `]`. And the 32B scores only 15% on counting, partly because of my harness. Its native JSON answer spends about 20 tokens per point, so 37 of its 195 counting answers ran into the frozen 64-token cap, were cut off mid-list and scored as misses. Most of the rest (145) gave a single point. Rerunning the 62 Point-Bench items where it hit the cap, with room for 512 tokens, lifts its counting score only to 19.5%: most of the long lists were wrong anyway.
+Two details are worth noticing. The 2B loses 6 points on RefCOCO in my format purely from formatting slips: in the frozen harness, 149 answers closed the tag with `]`. These slips even depend on the inference engine. Under vLLM the same model makes far fewer of them and scores 85.0%, and with a lenient parser both engines agree at about 87%. And the 32B scores only 15% on counting, partly because of my harness. Its native JSON answer spends about 20 tokens per point, so 37 of its 195 counting answers ran into the frozen 64-token cap, were cut off mid-list and scored as misses. Most of the rest (145) gave a single point. Rerunning the 62 Point-Bench items where it hit the cap, with room for 512 tokens, lifts its counting score only to 19.5%: most of the long lists were wrong anyway.
 
 ## SFT does most of the work
 
@@ -234,7 +234,7 @@ The final 2B is statistically level with the 4-bit 32B on Point-Bench and RefCOC
 | Qwen3-VL-2B, after SFT + 4 GRPO runs | 92.1% | 57% | 60.9% | 90 ms |
 | Qwen3-VL-32B (AWQ 4-bit), out of the box | 93.2% | 65% | 59.0% | 885 ms |
 
-Neither difference is significant (Point-Bench p = 0.25, RefCOCO p = 0.12). The latency gap is about tenfold because the comparison uses the same engine: under the 32B's vLLM settings, the 2B answers in 90 ms. Training contributes too: the fine-tuned 2B answers in about 15 tokens instead of the base model's 27–34, which alone cuts its Hugging Face latency from 272 to 164 ms. On Where2Place the final model trails, but run 1 matches the 32B's 65%. Scores are from the frozen Hugging Face harness; served with vLLM under the 32B's settings, the 2B scores 92.2%, 62% and 61.5%. The 2B also needs about 4.5 times less memory for its weights.
+Neither difference is significant (Point-Bench p = 0.25, RefCOCO p = 0.12). The latency gap is about tenfold because the comparison uses the same engine: under the 32B's vLLM settings, the 2B answers in 90 ms. About 4x of that comes from size alone: with the same prompt, the base 2B takes 146 ms against the 32B's 540 ms. The rest comes from training. The fine-tuned 2B writes only the point tag, about 15 tokens instead of the base model's 27–34, which takes it from 146 to 90 ms. The 32B's native JSON is longer still (885 ms). On Where2Place the final model trails, but run 1 matches the 32B's 65%. Scores are from the frozen Hugging Face harness; served with vLLM under the 32B's settings, the 2B scores 92.2%, 62% and 61.5%. The 2B also needs about 4.5 times less memory for its weights.
 
 The category split shows the two models win in different places:
 
