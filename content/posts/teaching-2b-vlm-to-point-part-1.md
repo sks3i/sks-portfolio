@@ -32,7 +32,7 @@ Before training anything I fixed three benchmarks, one output parser and one sta
 | Where2Place | 100 | Point at free space ("a spot between the mug and the plate") |
 | PointArena Point-Bench | 979 | Open-world pointing across five categories: affordance, counting, reasoning, spatial and steerable |
 
-A prediction counts if the first point lands inside the target mask (Point-Bench uses its own rule for counting). Decoding is greedy with a 64-token cap, and an unparseable answer is simply a miss.
+A prediction counts if the first point lands inside the target mask. On Point-Bench's counting questions ("point to all the apples"), an answer counts only if it gives exactly one point per object and every object is hit. Decoding is greedy with a 64-token cap, and an unparseable answer is simply a miss.
 
 Freezing early paid off on day one. The popular Hugging Face copy of RefCOCO "val" turned out to be more than half training data: only 3,811 of its 8,416 objects are in the real validation split. I sampled my 2,000 from those, rebuilt full masks from the raw COCO annotations, and filtered every training image against the eval images at the pixel level, not just by id.
 
@@ -63,7 +63,7 @@ Two details are worth noticing. The 2B loses 6 points on RefCOCO in my format pu
 
 ## SFT does most of the work
 
-Supervised fine-tuning on 60,000 examples took the 2B from 80.6% to 91.1% on RefCOCO and from 48.9% to 58.6% on Point-Bench, already past Molmo-7B-D. It took 4.6 hours.
+Supervised fine-tuning on 60,000 examples took the 2B from 80.6% to 91.1% on RefCOCO, from 40% to 51% on Where2Place, and from 48.9% to 58.6% on Point-Bench, already past Molmo-7B-D. It took 4.6 hours.
 
 The data mixes three sources. PixMo-Points gives open-vocabulary, human-clicked points. RefCOCO, RefCOCO+ and RefCOCOg give referring expressions, from short ("left dog") to long and relational. RoboPoint gives tabletop objects and free-space regions. I trained a LoRA adapter (rank 16) on the language model for two epochs and left the vision encoder frozen.
 
@@ -155,7 +155,7 @@ The two losses share a pattern that recurs later: the model lands on the anchor 
 
 If the training prompts were too easy, I would make hard ones. COCO has a mask for every instance of its 80 object classes, so I could generate phrases with exact answers: "the second cup from the left", "the bottle to the left of the laptop", "the person nearest the table", plus typos. The hard part was ambiguity. Spot checks found "second person from the right" counting a speck in the far background, and "the person below the frisbee" when two people were below it. I added filters so that every counted instance is a fair size and every distractor fails even a loose reading of the relation.
 
-On held-out images, run 2 learned exactly what it was taught. Relations went from 74% to 92% and ordinals from 42% to 53%. Point-Bench did not move at all: 58.7%.
+On held-out images, run 2 learned exactly what it was taught. Relations went from 74% to 92% and ordinals from 42% to 53%. Point-Bench stayed flat: 58.7%, against SFT's 58.6%.
 
 Only then did I do what I should have done first, and sorted the SFT model's 242 Point-Bench misses by cause:
 
