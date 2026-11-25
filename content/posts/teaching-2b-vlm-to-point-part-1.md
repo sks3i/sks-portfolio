@@ -10,6 +10,8 @@ I spent a few weeks teaching a 2-billion-parameter vision-language model to poin
 
 The interesting part is not the final number. It is what four reinforcement learning runs taught me about what RL can and cannot do. The short version: **with a short RL budget like mine, RL sharpens behavior the model already sometimes produces; it did not create skills the model never showed.** That matches the main line of recent work ([Yue et al., 2025](https://arxiv.org/abs/2504.13837)), though much longer RL runs can push past it ([ProRL, 2025](https://arxiv.org/abs/2505.24864)). Almost everything below is that idea, learned the hard way.
 
+**Model and code:** the final model is on Hugging Face as [Sks3i/qwen3-vl-2b-pointer](https://huggingface.co/Sks3i/qwen3-vl-2b-pointer), and the evals, data builders and training scripts are on GitHub at [sks3i/pointvlm](https://github.com/sks3i/pointvlm), with the trainer in [sks3i/localtrainer](https://github.com/sks3i/localtrainer/tree/vlm-grpo).
+
 ## The goal
 
 A point is the smallest useful answer a model can give about where something is. A robot needs a spot to grasp or a place to put a cup down. A UI agent needs a pixel to click. A point is also trivially checkable: it either lands on the object or it does not. That makes pointing a near-ideal playground for RL with a verifiable reward.
